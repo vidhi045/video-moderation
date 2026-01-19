@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+transformers
+torch
+opencv-python
+pillow
+motor
+pymongo
+python-dotenv

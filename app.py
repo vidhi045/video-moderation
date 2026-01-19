@@ -92,6 +92,18 @@ def classify_image_full(image: Image.Image):
         "top_predictions": sorted(results, key=lambda x: x["score"], reverse=True)[:5]
     }
 
+# ---------------- HEALTH CHECK ENDPOINT ----------------
+@app.get("/health")
+async def health():
+    return {
+        "status": "healthy",
+        "service": "video-moderation",
+        "model": MODEL_NAME,
+        "database": "connected" if client else "not connected",
+        "video_processing": True,
+        "timestamp": datetime.utcnow()
+    }
+
 # ---------------- VIDEO MODERATION ENDPOINT ----------------
 @app.post("/predict-video")
 async def predict_video(file: UploadFile = File(...)):
